@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Missao de Certificaçao mundo 2</title>
+    <!-- Incorporando um arquivo .js externo -->
+    <script src="ordenando.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div>
+        <!-- Campo de entrada numérico -->
+        <input type="number" id="valor" placeholder="Insira um valor">
+
+        <!-- Botão Adicionar -->
+        <button id="adicionar" onclick="add()">Adicionar</button>
+
+        <!-- Campo de seleção -->
+        <select id="algoritmo">
+            <option value="bubble">Bubble Sort</option>
+            <option value="selection">Selection Sort</option>
+            <option value="quick">Quick Sort</option>
+        </select>
+
+        <!-- Botón Ordenar -->
+        <button onclick="ordenar()">Ordenar</button>
+
+        <!-- Botón Misturar -->
+        <button onclick="misturar()">Misturar</button>
+
+        <!-- Lista de valores -->
+        <ul id="valores">
+            <!-- Aquí se agregarán los valores dinámicamente -->
+        </ul>
+    </div>
+
+    <script>
+        // Tus funciones add, ordenar y misturar aquí
+        function add() {
+            // Lógica para agregar un valor
+            // Paso a: Capturar el campo de entrada
+            const campoValor = document.getElementById('valor');
+            const valorInserido = campoValor.value;
+
+            // Paso b: Capturar la lista de valores
+            const listaValores = document.getElementById('valores');
+
+            // Paso c: Crear un elemento li
+            const nodo = document.createElement('li');
+
+            // Paso d: Definir un nodo de texto y agregarlo como hijo de node
+            const texto = document.createTextNode(valorInserido);
+            nodo.appendChild(texto);
+
+            // Agregar el nodo li a la lista de valores
+            listaValores.appendChild(nodo);
+
+            // Limpiar el campo de entrada después de agregar
+            campoValor.value = '';
+        }
+
+        function ordenar() {
+            // Lógica para ordenar
+            // Paso a: Capturar la lista de valores y la lista de selección
+    const listaValores = document.getElementById('valores');
+    const listaSeleccion = document.getElementById('selecao');
+
+    // Paso b: Obtener cada nodo de la lista de valores y agregar el contenido a un arreglo
+    const valoresArray = Array.from(listaValores.children).map(item => parseInt(eval(item.innerHTML)));
+
+    // Paso d: Elegir y aplicar el algoritmo de ordenación
+    const algoritmoSeleccionado = listaSeleccion.selectedIndex;
+    
+    switch (algoritmoSeleccionado) {
+        case 0: // Bubble Sort
+            bubbleSort(valoresArray);
+            break;
+        case 1: // Selection Sort
+            selectionSort(valoresArray);
+            break;
+        case 2: // Quick Sort
+            quickSort(valoresArray);
+            break;
+        default:
+            break;
+    }
+
+    // Paso e: Generar nuevos elementos para la lista de valores
+    const nuevosValores = valoresArray.map(valor => `<li>${valor}</li>`);
+
+    // Reemplazar el contenido de la lista de valores
+    listaValores.innerHTML = nuevosValores.join('');
+        }
+
+        function misturar() {
+            // Lógica para mezclar
+        // Paso a: Capturar la lista de valores
+        const listaValores = document.getElementById('valores');
+
+        // Paso b: Obtener cada nodo de la lista de valores y agregar el contenido a un arreglo
+        const valoresArray = Array.from(listaValores.children).map(item => parseInt(eval(item.innerHTML)));
+
+        // Paso d: Aplicar la función shuffle al vector
+        shuffle(valoresArray);
+
+        // Paso e: Generar nuevos elementos para la lista de valores
+        const nuevosValores = valoresArray.map(valor => `<li>${valor}</li>`);
+
+        // Reemplazar el contenido de la lista de valores
+        listaValores.innerHTML = nuevosValores.join('');
+        }
+    </script>
+</body>
+</html>
